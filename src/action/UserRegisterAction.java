@@ -1,8 +1,5 @@
 package action;
 
-import java.sql.Timestamp;
-import java.util.Date;
-
 import org.springframework.stereotype.Controller;
 
 import com.opensymphony.xwork2.Action;

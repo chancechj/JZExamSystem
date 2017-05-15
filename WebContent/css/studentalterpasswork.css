@@ -1,0 +1,21 @@
+@CHARSET "UTF-8";
+*{background:#eee;}
+.content{
+    margin: 0 auto;
+    width: 700px;
+    margin-top: 60px;
+    text-align:center;
+}
+.locationcss{
+	padding:15px;
+}
+.input{
+	width:235px;
+	height:38px;
+	text-align:center;
+	border-radius:10px;
+	margin-top:36px;
+	margin-buttom:20px;
+	background-color:transparent;
+	transition:border-color ease-in-out.15s,box-shadow ease-in-out .15s;
+}

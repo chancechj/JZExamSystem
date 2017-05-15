@@ -13,7 +13,7 @@ import service.GradeManagerImpl;
 
 
 @Controller
-public class getGradeAction implements Action {
+public class GradeAction implements Action {
 	private String contentType = "text/html;charset=utf-8";
 	
 	private int studentId;

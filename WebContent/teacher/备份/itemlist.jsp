@@ -9,28 +9,33 @@
 <script src="../js/jquery.min.js"></script>
 
 <script>
-$(document).ready(function(){
-	$.ajax({  
-        url: '/JZExamSystem/ItemGet.action',
-        type: 'POST',  	//请求类型
-		//data: {},//上传数据
-        dataType: 'json',//返回类型  
-        //timeout: 1000,  //设定超时  
-        //cache: false,   //禁用缓存  
-        error: function(xml) {  
-            alert("加载XML文档出错!");  
-        },
-        success: function(data){   //设置成功后回调函数
-			var json = eval(data.result);
-			var i=1;
-			$.each(json, function(index,value){
-                $("#blankfiling").append("<div id='blankfiling'><div class='blankfilingCss'>"+i+"."+json[index].content+"<br>答案："+json[index].answer+"<br></div></div>");
-				i++;
-			});
-		}
-	
-    }); 
-});
+//$(document).ready(function(){
+//	$.ajax({  
+//       url: '/JZExamSystem/ItemGet.action',
+//        type: 'POST',  	//请求类型
+//		data: {},//上传数据
+//        dataType: 'json',//返回类型  
+//        //timeout: 1000,  //设定超时  
+//        //cache: false,   //禁用缓存  
+//        error: function(xml) {  
+//            alert("加载XML文档出错!");  
+//        },
+//        success: function(data){   //设置成功后回调函数
+//			var json = eval(data.result);
+//			var i=1;
+//			$.each(json, function(index,value){
+//				var json = eval(data.result);
+//				$.each(json, function(index,value){
+//            		
+//            		if(json[index].type == "blankfiling")//填空题
+//            		{
+//           			
+//            		}
+//				});
+//			}
+//		}
+//    }); 
+//});
 </script>
 
 </head>

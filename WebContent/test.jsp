@@ -7,10 +7,16 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="/JZExamSystem/setExam.action" method="post">
+<form action="/JZExamSystem/RandomExam.action" method="post">
 	<input id="id" type="text" placeholder="账号" class="common input" name = "user_id" onfocus="xfjianpan(this.id)" value="">
     <input id="password" type="password" placeholder="密码" class="common input psw-height" name = "user_password" onfocus="xfjianpan(this.id)">
     <input class="common login-btn" type="submit" value="Login"/>
+    <input type="hidden" name="itemStr" value="1->2->3" />
 </form>
+
+<form action="/JZExamSystem/getItemsByIds.action" method="post">
+    <input class="common login-btn" type="submit" value="Login"/>
+    <input type="hidden" name="itemStr" value="1->2->3" />
+    </form>
 </body>
 </html>

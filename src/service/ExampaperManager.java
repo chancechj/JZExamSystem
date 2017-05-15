@@ -1,9 +1,11 @@
 package service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.HibernateException;
 
+import pojo.ExamParamters;
 import pojo.Exampaper;
 
 public interface ExampaperManager {
@@ -19,6 +21,10 @@ public interface ExampaperManager {
 	 * 	id：paperId，从exam存入后自增获取
 	 */
 	public boolean setExampaper(String items,String id) throws HibernateException;
+	
+	//将选择的题目id获取题目内容，存入session
+	public List<Object> getItemlist(String items);
+	
 	
 	public boolean recharge(Exampaper exampaper,Double amount) throws HibernateException;
 	public boolean reflect(Exampaper exampaper,Double amount) throws HibernateException;

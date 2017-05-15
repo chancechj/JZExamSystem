@@ -56,8 +56,7 @@ public class ExampaperManagerImpl implements ExampaperManager{
     }
     
     public boolean setExampaper(String items,String id) throws HibernateException{
-    	String[] strs; 	 //定义一数组 
-		strs=items.split("->");    //字符分割 
+    	String[] strs = splitStr(items);
 		
     	for(int i = 0; i < strs.length; i++){
     		if(strs[i]!=null){
@@ -69,6 +68,25 @@ public class ExampaperManagerImpl implements ExampaperManager{
     	}
     	
     	return true;
+    }
+    
+    public List<Object> getItemlist(String items){
+    	String[] strs = splitStr(items);
+    	List<Object> obj = new ArrayList<Object>();
+    	for(int i = 0; i < strs.length; i++){
+    		if(strs[i]!=null){
+    			obj.add(itemManager.getItemById(Integer.parseInt(strs[i])));
+    		}
+    	}
+    	
+    	return obj;
+    }
+    
+    
+    private String[] splitStr(String items){
+    	String[] strs; 	 //定义一数组 
+		strs=items.split("->");    //字符分割 
+    	return strs;
     }
 
 	@Override
