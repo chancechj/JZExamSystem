@@ -16,7 +16,7 @@ body {
 .system-title{
 	margin: 0 auto;
     width: 800px;
-    height: 20px;
+    height: 10px;
     margin-top: 20px;
     font-size:40px;
     color:#00BBFF;
@@ -26,14 +26,16 @@ body {
 .login-area {
     margin: 0 auto;
     width: 430px;
-    height: 450px;
+    height: 430px;
     margin-top: 25px;
-    
+    background:rgba(0,0,0,0.1);
+    border-radius:10px;
 }
 
 .login-area .common {
     font-family: Î¢ÈíÑÅºÚ;
     position: relative;
+    border-radius:10px;
 }
 
 .login-area .input {

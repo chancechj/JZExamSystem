@@ -1,0 +1,45 @@
+@CHARSET "UTF-8";
+body{
+	font-family: 微软雅黑;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-repeat:inherit;
+    background-color: #eeeeee;
+}
+#container {
+    margin: 0 auto;
+    width: 700px;
+    margin-top: 25px;
+    background:rgba(0,0,0,0.1);
+    border-radius:10px;
+}
+#container #title{
+	margin: 0 auto;
+    height: 40px;
+    margin-top: 10px;
+    font-size:60px;
+    background:#adadad;
+    padding: 5px 5px 5px 5px;		
+}
+#container #main{
+	    line-height:44px;
+	    padding: 10px 5px 5px 30px;
+	    background:rgba(0,0,0,0.1);
+}
+.btn-style{
+	    padding:8px 30px;
+   		line-height:24px;
+   		color:#fff;
+   		background-color:#4a4aff;
+	    border-radius:12px;/*边框圆角*/	    
+}
+.btn-style:hover {
+    background-color:#0000ff;
+    background-image: -webkit-gradient(linear, 0 0%, 0 100%, from(#e8a201), to(#feb100));
+    background-image: -webkit-linear-gradient(top, #e8a201 0%, #feb100 100%);
+    background-image: -moz-linear-gradient(top, #e8a201 0%, #feb100 100%);
+    background-image: -ms-linear-gradient(top, #e8a201 0%, #feb100 100%);
+    background-image: -o-linear-gradient(top, #e8a201 0%, #feb100 100%);
+    background-image: linear-gradient(top, #e8a201 0%, #feb100 100%);
+}

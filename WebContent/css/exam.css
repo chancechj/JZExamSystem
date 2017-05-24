@@ -64,15 +64,16 @@ html, body {
 
 a{
 	text-decoration:none;
+	color:#000000;
 }
 
-/*exam content  */
+/*exam content 内容的框样式 */
 #content {
   display: block;
   position: relative;
-  padding: 50px;
+  padding:50px 250px 60px 250px;
 }
-
+/* 题的字体样式 */
 .contentCss{
   display: block;
   position: relative;
@@ -80,10 +81,11 @@ a{
   -webkit-border-radius: 4px;  
   -moz-border-radius: 4px;   
   border-radius: 4px;
-  background-color: #fff;
+/*   background-color: #fff;   	min-height: 300px; */
   margin: 16px auto;
   clear:both;
   color:#000000;
+	padding: 40px;
 }
 
 .answerCss{
@@ -96,4 +98,12 @@ a{
   bottom: 0;
   float:right;
   margin-top: 10px;
+}
+.panel{
+	display:none;
+	width:220px;
+	padding:20px;
+	background-color:#333;
+	color:#fff;
+	box-shadow:inset 0 0 5px 5px #222;
 }

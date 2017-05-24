@@ -48,6 +48,7 @@ ul.overview {
 	list-style-position:outside;
 	list-style-type:disc;
 	margin:0 1.5em 1.5em;
+	text-decoration:none;
 }
 li {
 	font-size: 1.1em;
@@ -58,7 +59,7 @@ p {
 }
 a:link, a:visited, a:active {
 	color:#3366CC;
-	text-decoration:underline;
+	text-decoration:none;
 }
 a:hover {
 	color:#CC3333;
@@ -111,11 +112,11 @@ a:hover {
 	text-decoration:none;
 }
 #header h1 a:hover {
-	text-decoration: underline;
+	text-decoration: none;
 }
 #header .content {
 	float: right;
-	width: 550px;
+	width:750px;
 	line-height:25px;
 }
 #header img {
@@ -152,6 +153,7 @@ input, select, textarea {
 }
 .left {
 	float: left;
+	width:650px;
 }
 .right {
 	float: right;

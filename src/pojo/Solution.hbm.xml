@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-mapping>
+	<class name="pojo.Solution" table="solution" dynamic-update="true" dynamic-insert="true" >
+		<id name="solution_id">
+			<generator class="identity" />
+		</id>
+		<property name="problem_id" />
+		<property name="user_id" />
+		<property name="time" />
+		<property name="memory" />
+		<property name="in_date" />
+		<property name="result" />
+		<property name="language" />
+		<property name="ip" />
+		<property name="contest_id" />
+		<property name="valid" />
+		<property name="num" />
+		<property name="code_length" />
+		<property name="judgetime" />
+		<property name="pass_rate" />
+		<property name="int_error" />
+		<property name="judger" />
+	</class>
+</hibernate-mapping>

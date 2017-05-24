@@ -19,6 +19,7 @@ import pojo.Exampaper;
 import pojo.Item;
 import service.ExampaperManagerImpl;
 import service.ItemManagerImpl;
+import tool.DataTool;
 
 import org.apache.struts2.interceptor.RequestAware;
 
@@ -28,14 +29,42 @@ public class ItemAction implements Action  {
 	private String contentType = "text/html;charset=utf-8";
 	
 	private String result;
+	private String getItemsByIdresult;
 	
 	private String content;
 	private String type;
 	private String answer;
 	
+	private String itemStr;
+	
 	private ItemManagerImpl ItemManager;
 	
 	private Item item;
+	
+	/*
+	 * 根据题目id串获取全部题目内容
+	 * action:/JZExamSystem/getItemsByIds.action;
+	*/
+	public String Irems(){
+//		ServletActionContext.getResponse().setContentType(contentType);
+//		
+//		String[] s = DataTool.getItems(getItemStr());
+//		
+//		List<Object> list = new ArrayList<Object>();
+//		
+//		for(int i = 0; i< s.length; i++){
+//			if(s[i]!=null){
+//				list.add( ItemManager.getItemById(Integer.parseInt(s[i])) );
+//			}
+//		}
+		
+		//result = DataTool.getJsonStr(list);
+		
+		//System.out.println(result);
+		
+		return "success";
+	}
+	
 	
 	/*
 	 * mangeitemadd.jsp调用
@@ -61,16 +90,17 @@ public class ItemAction implements Action  {
 	 * itemlist.jsp、addexam调用
 	 * 作用：获取所有题目，将list<Object>转换为json返回前端
 	 */
-	public String getItems() throws Exception
+	public String getAllItems() throws Exception
 	{
 		ServletActionContext.getResponse().setContentType(contentType);
 		
-		JSONArray jsonStr = JSONArray.fromObject(ItemManager.getItems());	
-				
-		result = jsonStr.toString();
+		result = DataTool.getJsonStr(ItemManager.getItems());
+//		JSONArray jsonStr = JSONArray.fromObject(ItemManager.getItems());					
+//		result = jsonStr.toString();
 			
 		return "result";
 	}
+	
 
 	public String getResult() {
 		return result;
@@ -80,6 +110,14 @@ public class ItemAction implements Action  {
 		this.result = result;
 	}
 
+	public String getGetItemsByIdresult() {
+		return getItemsByIdresult;
+	}
+
+	public void setGetItemsByIdresult(String getItemsByIdresult) {
+		this.getItemsByIdresult = getItemsByIdresult;
+	}
+	
 	public String getContent() {
 		return content;
 	}
@@ -120,5 +158,12 @@ public class ItemAction implements Action  {
 		this.item = item;
 	}
 	
+	public void setItemStr(String itemStr){
+		this.itemStr = itemStr;
+	}
+	
+	public String getItemStr(){
+		return itemStr;
+	}
 	
 }

@@ -1,224 +1,342 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"    
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"   
-         xmlns:p="http://www.springframework.org/schema/p"  
-         xmlns:aop="http://www.springframework.org/schema/aop"   
-         xmlns:context="http://www.springframework.org/schema/context"  
-         xmlns:jee="http://www.springframework.org/schema/jee"  
-         xmlns:tx="http://www.springframework.org/schema/tx"  
-         xsi:schemaLocation="
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
              http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd    
              http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd  
              http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd  
              http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
              http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.3.xsd  
              http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
-     <!-- 数据库源定义 -->       
-	 <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
-        destroy-method="close">
-        <property name="driverClass">
-            <value>com.mysql.jdbc.Driver</value>
-        </property>
-        <property name="jdbcUrl">
-            <value>jdbc:mysql://localhost:3306/jzexamsystem?useSSL=false</value>
-        </property>
-        <property name="user">
-            <value>root</value>
-        </property>
-        <property name="password">
-            <value></value>
-        </property>
-        <property name="maxPoolSize">
-            <value>80</value>
-        </property>
-        <property name="minPoolSize">
-            <value>1</value>
-        </property>
-        <property name="initialPoolSize">
-            <value>1</value>
-        </property>
-        <property name="maxIdleTime">
-            <value>20</value>
-        </property>
-    </bean>
-    
-    <!-- session工程接管 -->
-    <bean id="sessionFactory"
-        class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
-        <property name="dataSource" ref="dataSource" />
-        <property name="mappingResources">
-        	<!-- 实体类配置文件 -->
-            <list>
-                <value>pojo/Student.hbm.xml</value>
-                <value>pojo/Teacher.hbm.xml</value>
-                <value>pojo/Administrator.hbm.xml</value>
-                <value>pojo/Item.hbm.xml</value>
-                <value>pojo/Grade.hbm.xml</value>
-                <value>pojo/Exampaper.hbm.xml</value>
-                <value>pojo/Exam.hbm.xml</value>
-            </list>
-        </property>
-        <property name="hibernateProperties">
-            <props>
-                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
-                <prop key="show_sql">true</prop>
-                <prop key="hibernate.jdbc.batch_size">20</prop>
-            </props>
-        </property>
-    </bean>
-    
-    <!-- 操作异常转化为Spring的表达方式 -->  
-    
-    <bean id="transactionManager"
-        class="org.springframework.orm.hibernate5.HibernateTransactionManager">
-        <property name="sessionFactory" ref="sessionFactory" />
-    </bean>
-    
-    <!-- DAO类注册 -->
-    <bean id="studentDaoImpl" class="daoImpl.StudentDaoImpl">
-        <property name="sessionFactory">
-            <ref bean="sessionFactory" />
-        </property>
-    </bean>
-    <bean id="teacherDaoImpl" class="daoImpl.TeacherDaoImpl">
-        <property name="sessionFactory">
-            <ref bean="sessionFactory" />
-        </property>
-    </bean>
-    <bean id="administratorDaoImpl" class="daoImpl.AdministratorDaoImpl">
-        <property name="sessionFactory">
-            <ref bean="sessionFactory" />
-        </property>
-    </bean>
-    <bean id="itemDaoImpl" class="daoImpl.ItemDaoImpl">
-        <property name="sessionFactory">
-            <ref bean="sessionFactory" />
-        </property>
-    </bean>
-    <bean id="gradeDaoImpl" class="daoImpl.GradeDaoImpl">
-        <property name="sessionFactory">
-            <ref bean="sessionFactory" />
-        </property>
-    </bean>
-    <bean id="exampaperDaoImpl" class="daoImpl.ExampaperDaoImpl">
-        <property name="sessionFactory">
-            <ref bean="sessionFactory" />
-        </property>
-    </bean>
-    <bean id="examDaoImpl" class="daoImpl.ExamDaoImpl">
-        <property name="sessionFactory">
-            <ref bean="sessionFactory" />
-        </property>
-    </bean>
-    
-    <!-- model类注册 -->
-    <bean id="student" class="pojo.Student"></bean>
-    <bean id="teacher" class="pojo.Teacher"></bean>
-    <bean id="administrator" class="pojo.Administrator"></bean>
-    <bean id="item" class="pojo.Item"></bean>
-    <bean id="grade" class="pojo.Grade"></bean>
-    <bean id="exampaper" class="pojo.Exampaper"></bean>
-    <bean id="exam" class="pojo.Exam"></bean>
-    
-    <!-- service类注册 -->
-    <bean id="studentManager" class="service.StudentManagerImpl">
-        <property name="dao">
-            <ref bean="studentDaoImpl" />
-        </property>
-    </bean>
-    <bean id="teacherManager" class="service.TeacherManagerImpl">
-        <property name="dao">
-            <ref bean="teacherDaoImpl" />
-        </property>
-    </bean>
-    <bean id="administratorManager" class="service.AdministratorManagerImpl">
-        <property name="dao">
-            <ref bean="administratorDaoImpl" />
-        </property>
-    </bean>
-      <bean id="itemManager" class="service.ItemManagerImpl">
-        <property name="dao">
-            <ref bean="itemDaoImpl" />
-        </property>
-    </bean>
-    <bean id="gradeManager" class="service.GradeManagerImpl">
-        <property name="dao">
-            <ref bean="gradeDaoImpl" />
-        </property>
-    </bean>
-    <bean id="exampaperManager" class="service.ExampaperManagerImpl">
-        <property name="dao">
-            <ref bean="exampaperDaoImpl" />
-        </property>
-        <property name="itemManager">
-            <ref bean="itemManager" />
-        </property>
-    </bean>
-    <bean id="examManager" class="service.ExamManagerImpl">
-        <property name="dao">
-            <ref bean="examDaoImpl" />
-        </property>
-        <property name="exampaperManager">
-            <ref bean="exampaperManager" />
-        </property>
-    </bean>
-    
-    <!-- action类注册 -->
-    <bean id="loginAction" class="action.UserLoginAction">
-    	<property name="studentManager">
-    		<ref bean="studentManager"></ref>
-    	</property>
-    	<property name="administratorManager">
-    		<ref bean="administratorManager"></ref>
-    	</property>
-    	<property name="teacherManager">
-    		<ref bean="teacherManager"></ref>
-    	</property>
-    </bean>
-    
-    <bean id="registerAction" class="action.UserRegisterAction">
-    	<property name="studentManager">
-    		<ref bean="studentManager"></ref>
-    	</property>
-    </bean>
-    
-    <bean id="itemAction" class="action.ItemAction">
-    	<property name="itemManager">
-    		<ref bean="itemManager"></ref>
-    	</property>
-    </bean>
-    
-    <bean id="teaExampaperAction" class="action.TeaExampaperAction">
-    	<property name="exampaperManager">
-    		<ref bean="exampaperManager"></ref>
-    	</property>
-    </bean>
-    
-    <bean id="getGradeAction" class="action.getGradeAction">
-    	<property name="gradeManager">
-    		<ref bean="gradeManager"></ref>
-    	</property>
-    </bean> 
-    <bean id="teaExamAction" class="action.TeaExamAction">
-    	<property name="examManager">
-    		<ref bean="examManager"></ref>
-    	</property>
-    	<property name="exampaperManager">
-    		<ref bean="exampaperManager"></ref>
-    	</property>
-    </bean> 
-    
-    <aop:aspectj-autoproxy proxy-target-class="true" />
+	<!-- 数据库源定义 -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<property name="driverClass">
+			<value>com.mysql.jdbc.Driver</value>
+		</property>
+		<property name="jdbcUrl">
+			<value>jdbc:mysql://localhost:3306/jzexamsystem?useSSL=false</value>
+		</property>
+		<property name="user">
+			<value>root</value>
+		</property>
+		<property name="password">
+			<value>123456</value>
+		</property>
+		<property name="maxPoolSize">
+			<value>80</value>
+		</property>
+		<property name="minPoolSize">
+			<value>1</value>
+		</property>
+		<property name="initialPoolSize">
+			<value>1</value>
+		</property>
+		<property name="maxIdleTime">
+			<value>20</value>
+		</property>
+	</bean>
 
-    <aop:config  proxy-target-class="true">
-        <aop:advisor pointcut="execution(* service.*.*(..))" advice-ref="transactionAdvice" /> <!-- 配置哪些类的哪些方法参与事务 --> 
-    </aop:config>
-    <tx:annotation-driven transaction-manager="transactionManager" />
+	<!-- 判题数据库源定义 -->
+	<bean id="judgeDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<property name="driverClass">
+			<value>com.mysql.jdbc.Driver</value>
+		</property>
+		<property name="jdbcUrl">
+			<value>jdbc:mysql://localhost:3306/jol</value>
+		</property>
+		<property name="user">
+			<value>root</value>
+		</property>
+		<property name="password">
+			<value>123456</value>
+		</property>
+		<property name="maxPoolSize">
+			<value>80</value>
+		</property>
+		<property name="minPoolSize">
+			<value>1</value>
+		</property>
+		<property name="initialPoolSize">
+			<value>1</value>
+		</property>
+		<property name="maxIdleTime">
+			<value>20</value>
+		</property>
+	</bean>
 
-    <!-- 配置事务传播特性 -->
-    <tx:advice id="transactionAdvice" transaction-manager="transactionManager">
-        <tx:attributes>
-            <tx:method name="*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
-        </tx:attributes>
-    </tx:advice>
+	<!-- session工程接管 -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="mappingResources">
+			<!-- 实体类配置文件 -->
+			<list>
+				<value>pojo/Student.hbm.xml</value>
+				<value>pojo/Teacher.hbm.xml</value>
+				<value>pojo/Administrator.hbm.xml</value>
+				<value>pojo/Item.hbm.xml</value>
+				<value>pojo/Grade.hbm.xml</value>
+				<value>pojo/Exampaper.hbm.xml</value>
+				<value>pojo/Exam.hbm.xml</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="show_sql">true</prop>
+				<prop key="hibernate.jdbc.batch_size">20</prop>
+			</props>
+		</property>
+	</bean>
+
+	<!-- 判题session工程接管 -->
+	<bean id="judgeSessionFactory"
+		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+		<property name="dataSource" ref="judgeDataSource" />
+
+		<!-- 注解方法，区分上面的xml方法和下面的自动扫描 -->
+			<property name="mappingResources">
+			<!-- 实体类配置文件 -->
+			<list>
+				<value>pojo/Solution.hbm.xml</value>
+				<value>pojo/Source_code.hbm.xml</value>
+			</list>
+		</property>
+		<!-- 自动扫描注解方式配置的hibernate类文件 -->
+		<!-- <property name="packagesToScan" value="pojo" />-->
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="show_sql">true</prop>
+				<prop key="hibernate.jdbc.batch_size">20</prop>
+			</props>
+		</property>
+	</bean>
+
+	<!-- 自动扫描dao和service包(自动注入) -->
+	<!-- <context:component-scan base-package="dao,service" /> -->
+
+	<!-- 配置Spring声明式事务 -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<!-- 配置事务传播特性 -->
+	<tx:advice id="transactionAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
+		</tx:attributes>
+	</tx:advice>
+	<!-- 配置事务切点，并把切点和事务属性关联起来 -->
+	<aop:config proxy-target-class="true">
+		<aop:advisor pointcut="execution(* service.*.*(..))"
+			advice-ref="transactionAdvice" /> <!-- 配置哪些类的哪些方法参与事务 -->
+	</aop:config>
+
+
+
+	<!-- 配置Spring声明式事务 -->
+	<bean id="judgetransactionManager"
+		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+		<property name="sessionFactory" ref="judgeSessionFactory" />
+	</bean>
+	<!-- 配置事务传播特性 -->
+	<tx:advice id="judgetransactionAdvice" transaction-manager="judgetransactionManager">
+		<tx:attributes>
+			<tx:method name="*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
+		</tx:attributes>
+	</tx:advice>
+	<!-- 配置事务切点，并把切点和事务属性关联起来 -->
+	<aop:config proxy-target-class="true">
+		<aop:advisor pointcut="execution(* service.chj.*.*(..))"
+			advice-ref="judgetransactionAdvice" /> <!-- 配置哪些类的哪些方法参与事务 -->
+	</aop:config>
+
+
+	<aop:aspectj-autoproxy proxy-target-class="true" />
+
+
+
+
+	<!-- DAO类注册 -->
+	<bean id="studentDaoImpl" class="daoImpl.StudentDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="teacherDaoImpl" class="daoImpl.TeacherDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="administratorDaoImpl" class="daoImpl.AdministratorDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="itemDaoImpl" class="daoImpl.ItemDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="gradeDaoImpl" class="daoImpl.GradeDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="exampaperDaoImpl" class="daoImpl.ExampaperDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="examDaoImpl" class="daoImpl.ExamDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+		<!-- chjDao -->
+	</bean>
+	<bean id="solutionDaoImpl" class="daoImpl.chj.SolutionDaoImpl">
+		<property name="judgeSessionFactory">
+			<ref bean="judgeSessionFactory" />
+		</property>
+	</bean>
+	<bean id="source_codeDaoImpl" class="daoImpl.chj.Source_codeDaoImpl">
+		<property name="judgeSessionFactory">
+			<ref bean="judgeSessionFactory" />
+		</property>
+	</bean>
+
+
+	<!-- model类注册 -->
+	<bean id="student" class="pojo.Student"></bean>
+	<bean id="teacher" class="pojo.Teacher"></bean>
+	<bean id="administrator" class="pojo.Administrator"></bean>
+	<bean id="item" class="pojo.Item"></bean>
+	<bean id="grade" class="pojo.Grade"></bean>
+	<bean id="exampaper" class="pojo.Exampaper"></bean>
+	<bean id="exam" class="pojo.Exam"></bean>
+	<bean id="examParamters" class="pojo.ExamParamters"></bean>
+	<bean id="solution" class="pojo.Solution"></bean>
+	<bean id="source_code" class="pojo.Source_code"></bean>
+
+	<!-- service类注册 -->
+	<bean id="studentManager" class="service.StudentManagerImpl">
+		<property name="dao">
+			<ref bean="studentDaoImpl" />
+		</property>
+	</bean>
+	<bean id="teacherManager" class="service.TeacherManagerImpl">
+		<property name="dao">
+			<ref bean="teacherDaoImpl" />
+		</property>
+	</bean>
+	<bean id="administratorManager" class="service.AdministratorManagerImpl">
+		<property name="dao">
+			<ref bean="administratorDaoImpl" />
+		</property>
+	</bean>
+	<bean id="itemManager" class="service.ItemManagerImpl">
+		<property name="dao">
+			<ref bean="itemDaoImpl" />
+		</property>
+	</bean>
+	<bean id="gradeManager" class="service.GradeManagerImpl">
+		<property name="dao">
+			<ref bean="gradeDaoImpl" />
+		</property>
+	</bean>
+	<bean id="exampaperManager" class="service.ExampaperManagerImpl">
+		<property name="dao">
+			<ref bean="exampaperDaoImpl" />
+		</property>
+		<property name="itemManager">
+			<ref bean="itemManager" />
+		</property>
+	</bean>
+	<bean id="examManager" class="service.ExamManagerImpl">
+		<property name="dao">
+			<ref bean="examDaoImpl" />
+		</property>
+		<property name="exampaperManager">
+			<ref bean="exampaperManager" />
+		</property>
+	</bean>
+	<bean id="solutionManager" class="service.chj.SolutionManagerImpl">
+		<property name="solutionDaoImpl">
+			<ref bean="solutionDaoImpl" />
+		</property>
+	</bean>
+	<bean id="source_codeManager" class="service.chj.Source_codeManagerImpl">
+		<property name="source_codeDaoImpl">
+			<ref bean="source_codeDaoImpl" />
+		</property>
+	</bean>
+
+
+
+	<!-- action类注册 -->
+	<bean id="loginAction" class="action.UserLoginAction">
+		<property name="studentManager">
+			<ref bean="studentManager"></ref>
+		</property>
+		<property name="administratorManager">
+			<ref bean="administratorManager"></ref>
+		</property>
+		<property name="teacherManager">
+			<ref bean="teacherManager"></ref>
+		</property>
+	</bean>
+
+	<bean id="registerAction" class="action.UserRegisterAction">
+		<property name="studentManager">
+			<ref bean="studentManager"></ref>
+		</property>
+	</bean>
+
+	<bean id="itemAction" class="action.ItemAction">
+		<property name="itemManager">
+			<ref bean="itemManager"></ref>
+		</property>
+	</bean>
+
+	<bean id="teaExampaperAction" class="action.TeaExampaperAction">
+		<property name="exampaperManager">
+			<ref bean="exampaperManager"></ref>
+		</property>
+	</bean>
+
+	<bean id="gradeAction" class="action.GradeAction">
+		<property name="gradeManager">
+			<ref bean="gradeManager"></ref>
+		</property>
+	</bean>
+	<bean id="teaExamAction" class="action.TeaExamAction">
+		<property name="examManager">
+			<ref bean="examManager"></ref>
+		</property>
+		<property name="exampaperManager">
+			<ref bean="exampaperManager"></ref>
+		</property>
+	</bean>
+	<!-- chj -->
+	<bean id="submitAction" class="action.SubmitCodeAction">
+		<property name="solutionManager">
+			<ref bean="solutionManager"></ref>
+		</property>
+		<property name="source_codeManager">
+			<ref bean="source_codeManager"></ref>
+		</property>
+	</bean>
+
+
+	<aop:aspectj-autoproxy proxy-target-class="true" />
+	<!-- 基于注解的方式使用事务配置声明 -->
+	<!-- <tx:annotation-driven transaction-manager="transactionManager" /> -->
+	<!-- <tx:annotation-driven transaction-manager="judgetransactionManager" 
+		/> -->
+
 </beans>

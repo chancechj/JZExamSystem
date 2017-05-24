@@ -5,10 +5,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>老师</title>
-<link rel="stylesheet" type="text/css" href="../css/zzsc-demo.css">
-<link rel="stylesheet" href="../css/teacherstyle.css"/>
-<script src="../jquery-1.11.0.min.js" type="text/javascript"></script>
-<script type="text/javascript" src="../hoverSlippery.js"></script>
+<link rel="stylesheet" type="text/css" href="css/zzsc-demo.css">
+<link rel="stylesheet" href="css/teacherstyle.css"/>
+<script src="js/jquery-1.11.0.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="js/hoverSlippery.js"></script>
 <script>
   $(document).ready(function(){
 	//- Default 
@@ -35,12 +35,12 @@
 <form action="">
 <div class="zzsc-container">
 	<div class="c">
-		  <h3 class="space">姓名：</h3>
+		  <h3 class="space">姓名：....</h3>
 		  <nav class="nav default">
 			<ul>
-			  <li class="nav__item active"><a href="#">管理试卷</a></li>
-			  <li class="nav__item"><a href="#">管理题库</a></li>
-			  <li class="nav__item"><a href="#">查看成绩</a></li>
+			  <li class="nav__item active"><a href="teacher/manageexam.jsp">管理试卷</a></li>
+			  <li class="nav__item"><a href="teacher/manageitemsearch.jsp">管理题库</a></li>
+			  <li class="nav__item"><a href="teacher/searchgrade.jsp">查看成绩</a></li>
 			</ul>
 		  </nav>
 	</div>

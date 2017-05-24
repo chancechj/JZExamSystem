@@ -13,11 +13,8 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/json-lib-2.4-jdk15andJar/commons-lang-2.6.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/json-lib-2.4-jdk15andJar/commons-logging-1.1.1.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/json-lib-2.4-jdk15andJar/ezmorph-1.0.6.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/json-lib-2.4-jdk15andJar/json-lib-2.4-jdk15.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/json-lib-2.4-jdk15andJar/jsonplugin-0.32.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/json-lib-2.4-jdk15andJar/xom-1.2.6.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/struts2-json-plugin-2.5.10.1.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/struts2-junit-plugin-2.5.10.1.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jsonplugin-0.32.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jstl-1.2.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
